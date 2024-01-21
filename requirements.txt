@@ -1,2 +1,5 @@
 graphdatascience
 matplotlib
+langchain
+openai
+tiktoken
