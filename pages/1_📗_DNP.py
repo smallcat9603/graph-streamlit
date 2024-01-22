@@ -10,6 +10,8 @@ DATA_DIR = "https://raw.githubusercontent.com/smallcat9603/graph/main/dnp/kg/dat
 FILE_NODES = ["Article", "Noun", "Query"]
 FILE_RELATIONSHIPS =["CONTAINS", "CORRELATES", "SIMILAR_JACCARD", "SIMILAR_OVERLAP", "SIMILAR_COSINE", "SIMILAR_FASTRP", "SIMILAR_NODE2VEC", "SIMILAR_HASHGNN"]
 
+st.write(DATA)
+
 st.title(f"{DATA} Dataset")
 st.info("This database includes 100 DNP newsreleases, and 4 Toppan newsreleases.")
 
