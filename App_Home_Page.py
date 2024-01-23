@@ -27,7 +27,7 @@ st.session_state["user"] = st.secrets[neo4j_server+"_USER"]
 st.session_state["password"] = st.secrets[neo4j_server+"_PASSWORD"]
 st.session_state["gds"] = GraphDataScience(st.session_state["host"], auth=(st.session_state["user"], st.session_state["password"]))
 
-st.success(f"Connection successful to GDBS server: {host}") 
+st.success(f"Connection successful to GDBS server: {st.session_state['host']}") 
 st.info(f"GDS version: {st.session_state['gds'].version()}")
 st.session_state["graph_name"] = "testgraph" # project graph name
 st.divider()
