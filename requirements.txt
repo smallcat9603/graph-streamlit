@@ -8,7 +8,6 @@ scikit-learn
 optuna
 networkx
 igraph
-langchain
 openai
 tiktoken
 langchain_community
