@@ -11,3 +11,4 @@ igraph
 langchain
 openai
 tiktoken
+langchain_community
