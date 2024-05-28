@@ -1,5 +1,6 @@
 from graphdatascience import GraphDataScience
 import streamlit as st
+from pages.lib import cypher, flow
 
 ##############################
 ### neo4j desktop v5.11.0 ###
@@ -27,6 +28,8 @@ st.session_state["user"] = st.secrets[neo4j_server+"_USER"]
 st.session_state["password"] = st.secrets[neo4j_server+"_PASSWORD"]
 st.session_state["gds"] = GraphDataScience(st.session_state["host"], auth=(st.session_state["user"], st.session_state["password"]))
 
+st.session_state["dir"] = "https://raw.githubusercontent.com/smallcat9603/graph/main/dnp/kg/data/"
+
 st.success(f"Connection successful to GDBS server: {st.session_state['host']}") 
 st.info(f"GDS version: {st.session_state['gds'].version()}")
 st.session_state["graph_name"] = "testgraph" # project graph name
@@ -38,19 +41,10 @@ if "data" not in st.session_state:
 else:
     container_data.warning(f"Data {st.session_state['data']} is loaded. When switching between graph databases, 'Reset' the GDBS server status first!")
 
-@st.cache_data
-def cypher(query):
-   return st.session_state["gds"].run_cypher(query)
-
 if st.button("Reset", type="primary"):
-    exists_result = st.session_state["gds"].graph.exists(st.session_state["graph_name"])
-    if exists_result["exists"]:
-        G = st.session_state["gds"].graph.get(st.session_state["graph_name"])
-        G.drop()    
-    query = """
-    MATCH (n) DETACH DELETE n
-    """
-    cypher(query)
+    flow.drop_memory_graph(st.session_state["graph_name"])
+    cypher.free_up_db()
+
     st.cache_data.clear() # clear cache data via @st.cache_data, not including st.session_state
     for key in st.session_state.keys():
         del st.session_state[key]
