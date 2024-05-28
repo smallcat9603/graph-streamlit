@@ -6,3 +6,4 @@ tiktoken
 spacy
 scikit-learn
 optuna
+networkx
